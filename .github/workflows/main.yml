@@ -2,26 +2,35 @@ name: Update Koi
 
 on:
   schedule:
-    # Runs every hour (adjust as needed)
-    - cron: '0 * * * *'
-  workflow_dispatch: # Allows you to run it manually
+    # Just after midnight UTC, so the koi shows the day that just ended
+    - cron: "20 0 * * *"
+  workflow_dispatch:
+  push:
+    paths: [.github/workflows/main.yml]
+
+permissions:
+  contents: write
+
+concurrency: koi
 
 jobs:
   update-koi:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - name: Generate Koi
-        uses: actions/checkout@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Commit and Push Changes
+      - uses: actions/checkout@v7
+      - uses: yalongwastaken/git-koi@v1
+        with:
+          body: white
+          output-dir: koi
+      - name: Commit the koi if it changed
+        shell: bash
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git diff --quiet && git diff --staged --quiet || git commit -m "Update profile koi"
-          git push
+          git add koi/koi.gif
+          if git diff --cached --quiet; then
+            echo "The koi is unchanged; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit --quiet --message "koi: draw the day's koi"
+          git push --quiet
