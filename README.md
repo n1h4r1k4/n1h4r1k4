@@ -37,3 +37,5 @@ I'm **Niharika Sharma**, an Electrical and Electronics Engineering student based
 **Connect with me:**
 * 📧 Email: niha4rika7@gmail.com
 * 💼 LinkedIn: [Niharika Sharma](https://www.linkedin.com/)
+
+<img src="koi/koi.gif" width="256" alt="My koi">
