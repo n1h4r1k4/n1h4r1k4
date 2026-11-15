@@ -3,6 +3,4 @@
 ---------------------------------------------------------------------------------------------------------------------------------
 **Commit History:**
 
-<p align="center">
-  <img src="koi/pond.gif" width="256" alt="My koi swimming in its pond, redrawn every night from my GitHub activity" />
-</p>
+<img src="koi/pond.gif" width="100%" alt="My koi swimming in its pond, redrawn every night from my GitHub activity" />
